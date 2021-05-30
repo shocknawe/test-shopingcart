@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+import "proto/google/type/money.proto";
+
+package takehome;
+
+option go_package = "/proto";
+
+message Product {
+  // SKU used in examples
+  // 120P90
+  string sku = 1;
+  string name = 2;
+
+  // Uses google's type for money
+  google.type.Money price = 3;
+
+  uint32 inventory_quantity = 4;
+}
+
+message Discount {
+  enum DiscountType {
+    DISCOUNTTYPE_NONE = 0;
+    DISCOUNTTYPE_PERCENT = 1;
+    DISCOUNTTYPE_FREEGIFT = 2;
+  }
+  DiscountType discount_type = 1;
+  string discount_name = 2;
+  string discount_description = 3;
+  string discount_condition = 4;
+}
+
+message TransactionLineItem {
+  Product product = 1;
+  uint32 quantity = 2;
+  Discount discount = 3;
+}
+
+message Transaction {
+  repeated TransactionLineItem transactions = 1;
+}
