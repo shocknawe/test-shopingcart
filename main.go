@@ -3,15 +3,15 @@ package main
 import (
 	"fmt"
 
-	"github.com/shocknawe/test-shopingcart/proto"
+	"github.com/shocknawe/test-shopingcart/pb"
 	"google.golang.org/genproto/googleapis/type/money"
 )
 
 func main() {
-	transaction := proto.Transaction{
-		Transactions: []*proto.TransactionLineItem{
-			&proto.TransactionLineItem{
-				Product: &proto.Product{
+	transaction := pb.Transaction{
+		Transactions: []*pb.TransactionLineItem{
+			&pb.TransactionLineItem{
+				Product: &pb.Product{
 					Sku:  "120P90",
 					Name: "GoogleHome",
 					Price: &money.Money{
@@ -21,8 +21,8 @@ func main() {
 					},
 				},
 				Quantity: 1,
-				Discount: &proto.Discount{
-					DiscountType: proto.Discount_DISCOUNTTYPE_NONE,
+				Discount: &pb.Discount{
+					DiscountType: pb.Discount_DISCOUNTTYPE_NONE,
 				},
 			},
 		},

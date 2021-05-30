@@ -1,22 +1,10 @@
 syntax = "proto3";
 
-import "proto/google/type/money.proto";
+import "transaction/product.proto";
 
-package takehome;
+package transaction;
 
-option go_package = "/proto";
-
-message Product {
-  // SKU used in examples
-  // 120P90
-  string sku = 1;
-  string name = 2;
-
-  // Uses google's type for money
-  google.type.Money price = 3;
-
-  uint32 inventory_quantity = 4;
-}
+option go_package = "/transaction";
 
 message Discount {
   enum DiscountType {
@@ -39,3 +27,5 @@ message TransactionLineItem {
 message Transaction {
   repeated TransactionLineItem transactions = 1;
 }
+
+service TransactionService {}
