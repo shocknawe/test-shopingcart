@@ -16,7 +16,7 @@ message Discount {
   string discount_name = 2;
   string discount_description = 3;
 
-  string discount_value = 4;
+  float discount_value = 4;
   string discount_gift = 5;
 
   // 
