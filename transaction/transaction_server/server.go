@@ -1,6 +1,8 @@
 package main
 
 import (
+	"context"
+	"fmt"
 	"log"
 	"net"
 
@@ -12,11 +14,23 @@ type server struct {
 	transaction.UnimplementedTransactionServiceServer
 }
 
+func (s *server) GetTotal(cts context.Context, request *transaction.TransactionRequest) (*transaction.TransactionResponse, error) {
+	lineItems := request.GetTransaction().GetLineItems()
+	fmt.Println(lineItems)
+
+	response := &transaction.TransactionResponse{
+		Total: 0,
+	}
+
+	return response, nil
+}
+
 func main() {
 	listener, err := net.Listen("tcp", "0.0.0.0:50051")
 	if err != nil {
 		log.Fatalln("Unable to create listener", err)
 	}
+	log.Println("Listening to port 50051...")
 
 	s := grpc.NewServer()
 	transaction.RegisterTransactionServiceServer(s, &server{})

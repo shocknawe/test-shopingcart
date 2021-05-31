@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-import "google/type/money.proto";
-
 package transaction;
 
 option go_package = "/transaction";
@@ -12,8 +10,8 @@ message Product {
   string sku = 1;
   string name = 2;
 
-  // Uses google's type for money
-  google.type.Money price = 3;
+  // price times 1000
+  int64 price = 3;
 
-  uint32 inventory_quantity = 4;
+  int32 inventory_quantity = 4;
 }

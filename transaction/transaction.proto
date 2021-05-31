@@ -15,17 +15,32 @@ message Discount {
   DiscountType discount_type = 1;
   string discount_name = 2;
   string discount_description = 3;
-  string discount_condition = 4;
+
+  string discount_value = 4;
+  string discount_gift = 5;
+
+  // 
+  string discount_condition = 6;
 }
 
 message TransactionLineItem {
   Product product = 1;
-  uint32 quantity = 2;
+  int32 quantity = 2;
   Discount discount = 3;
 }
 
 message Transaction {
-  repeated TransactionLineItem transactions = 1;
+  repeated TransactionLineItem line_items = 1;
 }
 
-service TransactionService {}
+message TransactionRequest {
+  Transaction transaction = 1;
+}
+message TransactionResponse {
+  // total times 1000
+  int64 total = 1;
+}
+
+service TransactionService {
+  rpc GetTotal (TransactionRequest) returns (TransactionResponse) {};
+}
